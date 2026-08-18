@@ -1,0 +1,6 @@
+{
+    "parent":"minecraft:block/cross",
+    "textures":{
+        "cross": "cannabis:block/cannabis_plant_top"
+    }
+}

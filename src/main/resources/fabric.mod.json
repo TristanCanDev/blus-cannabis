@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "cannabis",
+	"version": "${version}",
+	"name": "Blu's Cannabis",
+	"description": "Adds Cannabis to Minecraft!",
+	"authors": [
+		"Tristan Bouchard (BluIsBlue)"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://fabricmc.net/"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/cannabis/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.bouchard.cannabis.BluSCannabis"
+		],
+		"client": [
+			"com.bouchard.cannabis.client.BluSCannabisClient"
+		],
+		"fabric-datagen": [
+			"com.bouchard.cannabis.client.datagen.BluSCannabisDataGenerator"
+		]
+	},
+	"mixins": [
+		"cannabis.mixins.json",
+		{
+			"config": "cannabis.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
