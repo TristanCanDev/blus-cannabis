@@ -33,10 +33,10 @@ public class BluSCannabis implements ModInitializer {
 		// Proceed with mild caution.
 
 		ModItems.initialize();
-		LOGGER.info("Initialized Cannabis Items");
+		LOGGER.info("[cannabis] Initialized Cannabis Items");
 
 		ModBlocks.initialize();
-		LOGGER.info("Initialized Cannabis Blocks");
+		LOGGER.info("[cannabis] Initialized Cannabis Blocks");
 
 		LootTableEvents.MODIFY.register((lootTable, builder, source, provider) -> {
 			if((lootTable.identifier().equals(Blocks.SHORT_GRASS.getLootTable().get().identifier()) || lootTable.identifier().equals(Blocks.TALL_GRASS.getLootTable().get().identifier()) || lootTable.identifier().equals(Blocks.TALL_DRY_GRASS.getLootTable().get().identifier())) && source.isBuiltin()){
@@ -45,7 +45,7 @@ public class BluSCannabis implements ModInitializer {
 			}
 		});
 
-		LOGGER.info("I was gonna log something useful, but then I got high");
+		LOGGER.info("[cannabis] I was gonna log something useful, but then I got high");
 	}
 
 	public static Identifier id(String path) {
