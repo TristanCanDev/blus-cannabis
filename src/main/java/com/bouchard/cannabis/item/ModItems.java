@@ -36,7 +36,7 @@ public class ModItems{
     public static final Consumable MARIJUANA_POOR_CONSUMABLE_COMPONENT = Consumable.builder()
         .hasConsumeParticles(false)
         .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.RESISTANCE, 20 * 120, 1), 1.0f))
-        .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.NAUSEA, 20 * 120, 2), 1.0f))
+        .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.NAUSEA, 20 * 120, 0), 1.0f))
         .consumeSeconds(1.3f)
         .animation(ItemUseAnimation.EAT)
         .sound(inhaleSound)
