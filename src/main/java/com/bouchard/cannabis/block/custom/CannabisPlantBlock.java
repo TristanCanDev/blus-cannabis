@@ -150,12 +150,17 @@ public class CannabisPlantBlock extends VegetationBlock implements BonemealableB
     }
 
     protected static float getGrowthSpeed(final Block type, final ServerLevel level, final BlockPos pos) {
-		// We'll set some speed here.. this method is required for cropblocks I think..  
         
         // This was 11 before.. way fast but may be fairer in enclosed spaces with artificial lighting
         float speed = 1.0F;
         
-        
+        if(getLightType(level, pos) == LightType.SKY && isSuitableEnvironment(level, pos)){ // Skylight and suitable environment
+            speed += 6.0f; // Speed would then be 7.0f
+        } else if (getLightType(level, pos) == LightType.SKY && !isSuitableEnvironment(level, pos)){ // Skylight and unsuitable environment
+            speed += 2.0f; // Speed would be greatly reduced sitting at 3.0f
+        } else{ // Artificial light, doesn't matter about the environment as artificial light gets rid of snow and ice
+            speed += 8.0f; // Speed would be pretty good at 9.0f. A reduction from the initial 11.0f which was fairly fast.
+        }
 
 		return speed;
 	}
