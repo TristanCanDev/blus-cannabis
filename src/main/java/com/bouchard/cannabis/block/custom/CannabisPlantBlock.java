@@ -7,6 +7,7 @@ import com.bouchard.cannabis.item.ModItems;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
@@ -17,6 +18,9 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
@@ -113,8 +117,46 @@ public class CannabisPlantBlock extends VegetationBlock implements BonemealableB
 		return Mth.nextInt(level.getRandom(), 1, 3);
 	}
 
-    protected static float getGrowthSpeed(final Block type, final BlockGetter level, final BlockPos pos) {
-		float speed = 11.0F;
+    // Easy helper for determining where the majority of light is coming from..
+    protected enum LightType {
+        SKY,
+        BLOCK
+    }
+
+    // Helper function for quickly determining whether the majority light comes from sky or block..
+    protected LightType getLightType(final ServerLevel level, final BlockPos pos){
+        int blockLight = level.getBrightness(LightLayer.BLOCK, pos);
+        int skyLight = level.getBrightness(LightLayer.SKY, pos);
+
+        if(blockLight > skyLight){
+            return LightType.BLOCK;
+        } else {
+            return LightType.SKY;
+        }
+
+    }
+
+    protected boolean isSuitableEnvironment(final ServerLevel level, final BlockPos pos){
+        Holder<Biome> currentBiome = level.getBiome(pos);
+        
+        // Unsuitible
+        if(currentBiome.is(Biomes.BADLANDS) || currentBiome.is(Biomes.BASALT_DELTAS) || currentBiome.is(Biomes.BEACH) || currentBiome.is(Biomes.COLD_OCEAN) || currentBiome.is(Biomes.CRIMSON_FOREST) || currentBiome.is(Biomes.DEEP_COLD_OCEAN) || currentBiome.is(Biomes.DEEP_DARK) || currentBiome.is(Biomes.DEEP_FROZEN_OCEAN) || currentBiome.is(Biomes.DESERT) || currentBiome.is(Biomes.DRIPSTONE_CAVES) || currentBiome.is(Biomes.END_BARRENS) || currentBiome.is(Biomes.END_HIGHLANDS) || currentBiome.is(Biomes.END_MIDLANDS) || currentBiome.is(Biomes.ERODED_BADLANDS) || currentBiome.is(Biomes.FROZEN_OCEAN) || currentBiome.is(Biomes.FROZEN_PEAKS) || currentBiome.is(Biomes.FROZEN_RIVER) || currentBiome.is(Biomes.ICE_SPIKES) || currentBiome.is(Biomes.JAGGED_PEAKS) || currentBiome.is(Biomes.NETHER_WASTES) || currentBiome.is(Biomes.SNOWY_BEACH) || currentBiome.is(Biomes.SNOWY_PLAINS) || currentBiome.is(Biomes.SNOWY_SLOPES) || currentBiome.is(Biomes.SNOWY_TAIGA) || currentBiome.is(Biomes.SOUL_SAND_VALLEY) || currentBiome.is(Biomes.STONY_PEAKS) || currentBiome.is(Biomes.STONY_SHORE) || currentBiome.is(Biomes.SULFUR_CAVES) || currentBiome.is(Biomes.THE_END) || currentBiome.is(Biomes.THE_VOID) || currentBiome.is(Biomes.WARPED_FOREST) || currentBiome.is(Biomes.WOODED_BADLANDS)){
+            return false;
+        }
+        
+        // Otherwise generally suitable
+        return true;
+
+    }
+
+    protected static float getGrowthSpeed(final Block type, final ServerLevel level, final BlockPos pos) {
+		// We'll set some speed here.. this method is required for cropblocks I think..  
+        
+        // This was 11 before.. way fast but may be fairer in enclosed spaces with artificial lighting
+        float speed = 1.0F;
+        
+        
+
 		return speed;
 	}
 
@@ -124,7 +166,7 @@ public class CannabisPlantBlock extends VegetationBlock implements BonemealableB
 	}
 
     protected static boolean hasSufficientLight(final LevelReader level, final BlockPos pos) {
-		return level.getRawBrightness(pos, 0) >= 8;
+		return level.getRawBrightness(pos, 0) >= 10;
 	}
 
     protected ItemLike getBaseSeedId() {
