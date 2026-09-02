@@ -38,12 +38,14 @@ public class BluSCannabis implements ModInitializer {
 		ModBlocks.initialize();
 		LOGGER.info("[cannabis] Initialized Cannabis Blocks");
 
+		// Modify the short grass and tall grass loot tables to include cannabis seed drops (They drop at a probability of 0.001)
 		LootTableEvents.MODIFY.register((lootTable, builder, source, provider) -> {
 			if((lootTable.identifier().equals(Blocks.SHORT_GRASS.getLootTable().get().identifier()) || lootTable.identifier().equals(Blocks.TALL_GRASS.getLootTable().get().identifier()) || lootTable.identifier().equals(Blocks.TALL_DRY_GRASS.getLootTable().get().identifier())) && source.isBuiltin()){
-				LootPool poolBuilder = LootPool.lootPool().setRolls(new ConstantValue(1f)).add(LootItem.lootTableItem(ModItems.CANNABIS_SEEDS)).when(LootItemRandomChanceCondition.randomChance(0.03f)).build();
+				LootPool poolBuilder = LootPool.lootPool().setRolls(new ConstantValue(1f)).add(LootItem.lootTableItem(ModItems.CANNABIS_SEEDS)).when(LootItemRandomChanceCondition.randomChance(0.001f)).build();
 				builder.pool(poolBuilder);
 			}
 		});
+		LOGGER.info("[cannabis] Updated short and tall grass loot pools for cannabis seed drops");
 
 		LOGGER.info("[cannabis] I was gonna log something useful, but then I got high");
 	}
