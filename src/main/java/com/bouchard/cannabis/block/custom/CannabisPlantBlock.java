@@ -124,7 +124,7 @@ public class CannabisPlantBlock extends VegetationBlock implements BonemealableB
     }
 
     // Helper function for quickly determining whether the majority light comes from sky or block..
-    protected LightType getLightType(final ServerLevel level, final BlockPos pos){
+    protected static LightType getLightType(final ServerLevel level, final BlockPos pos){
         int blockLight = level.getBrightness(LightLayer.BLOCK, pos);
         int skyLight = level.getBrightness(LightLayer.SKY, pos);
 
@@ -136,14 +136,14 @@ public class CannabisPlantBlock extends VegetationBlock implements BonemealableB
 
     }
 
-    protected boolean isSuitableEnvironment(final ServerLevel level, final BlockPos pos){
+    protected static boolean isSuitableEnvironment(final ServerLevel level, final BlockPos pos){
         Holder<Biome> currentBiome = level.getBiome(pos);
         
         // Unsuitible
         if(currentBiome.is(Biomes.BADLANDS) || currentBiome.is(Biomes.BASALT_DELTAS) || currentBiome.is(Biomes.BEACH) || currentBiome.is(Biomes.COLD_OCEAN) || currentBiome.is(Biomes.CRIMSON_FOREST) || currentBiome.is(Biomes.DEEP_COLD_OCEAN) || currentBiome.is(Biomes.DEEP_DARK) || currentBiome.is(Biomes.DEEP_FROZEN_OCEAN) || currentBiome.is(Biomes.DESERT) || currentBiome.is(Biomes.DRIPSTONE_CAVES) || currentBiome.is(Biomes.END_BARRENS) || currentBiome.is(Biomes.END_HIGHLANDS) || currentBiome.is(Biomes.END_MIDLANDS) || currentBiome.is(Biomes.ERODED_BADLANDS) || currentBiome.is(Biomes.FROZEN_OCEAN) || currentBiome.is(Biomes.FROZEN_PEAKS) || currentBiome.is(Biomes.FROZEN_RIVER) || currentBiome.is(Biomes.ICE_SPIKES) || currentBiome.is(Biomes.JAGGED_PEAKS) || currentBiome.is(Biomes.NETHER_WASTES) || currentBiome.is(Biomes.SNOWY_BEACH) || currentBiome.is(Biomes.SNOWY_PLAINS) || currentBiome.is(Biomes.SNOWY_SLOPES) || currentBiome.is(Biomes.SNOWY_TAIGA) || currentBiome.is(Biomes.SOUL_SAND_VALLEY) || currentBiome.is(Biomes.STONY_PEAKS) || currentBiome.is(Biomes.STONY_SHORE) || currentBiome.is(Biomes.SULFUR_CAVES) || currentBiome.is(Biomes.THE_END) || currentBiome.is(Biomes.THE_VOID) || currentBiome.is(Biomes.WARPED_FOREST) || currentBiome.is(Biomes.WOODED_BADLANDS)){
             return false;
         }
-        
+
         // Otherwise generally suitable
         return true;
 
