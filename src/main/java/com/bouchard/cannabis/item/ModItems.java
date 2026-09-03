@@ -6,6 +6,7 @@ import com.bouchard.cannabis.item.custom.CannabisJoint;
 import com.bouchard.cannabis.item.custom.CannabisSeeds;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.registry.CompostableRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -57,6 +58,7 @@ public class ModItems{
 
     public static void initialize(){
 
+        // Register items to their creative menu tabs
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS)
         .register(entries -> {
             entries.accept(CANNABIS_BUD);
@@ -66,6 +68,10 @@ public class ModItems{
         .register(entries -> {
             entries.accept(CANNABIS_JOINT);
         });
+
+        // Register compostables
+        CompostableRegistry.INSTANCE.add(ModItems.CANNABIS_BUD, 0.3f);
+        CompostableRegistry.INSTANCE.add(ModItems.CANNABIS_SEEDS, 0.3f);
 
     }
 
