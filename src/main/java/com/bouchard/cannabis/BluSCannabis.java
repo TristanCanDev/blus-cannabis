@@ -7,9 +7,15 @@ import com.bouchard.cannabis.block.ModBlocks;
 import com.bouchard.cannabis.item.ModItems;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
@@ -43,6 +49,9 @@ public class BluSCannabis implements ModInitializer {
 			}
 		});
 		LOGGER.info("[cannabis] Updated short and tall grass loot pools for cannabis seed drops");
+
+		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.STONY_PEAKS, Biomes.MEADOW, Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS), GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "cannabis_patch")));
+		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.JUNGLE, Biomes.BAMBOO_JUNGLE, Biomes.FOREST, Biomes.SPARSE_JUNGLE, Biomes.RIVER), GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "cannabis_patch_forest_jungle")));
 
 		LOGGER.info("[cannabis] I was gonna log something useful, but then I got high");
 	}

@@ -171,7 +171,7 @@ public class CannabisPlantBlock extends VegetationBlock implements BonemealableB
 	}
 
     protected static boolean hasSufficientLight(final LevelReader level, final BlockPos pos) {
-		return level.getRawBrightness(pos, 0) >= 10;
+		return level.getRawBrightness(pos, 0) >= 2;
 	}
 
     protected ItemLike getBaseSeedId() {
