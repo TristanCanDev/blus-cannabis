@@ -128,7 +128,7 @@ public class CannabisPlantBlock extends VegetationBlock implements BonemealableB
         int blockLight = level.getBrightness(LightLayer.BLOCK, pos);
         int skyLight = level.getBrightness(LightLayer.SKY, pos);
 
-        if(blockLight > skyLight){
+        if(blockLight > skyLight || blockLight >= 13){
             return LightType.BLOCK;
         } else {
             return LightType.SKY;
