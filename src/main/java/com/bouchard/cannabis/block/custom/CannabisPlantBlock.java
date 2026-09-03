@@ -1,5 +1,7 @@
 package com.bouchard.cannabis.block.custom;
 
+import javax.swing.text.html.BlockView;
+
 import org.jspecify.annotations.Nullable;
 
 import com.bouchard.cannabis.block.ModBlocks;
@@ -39,6 +41,10 @@ public class CannabisPlantBlock extends VegetationBlock implements BonemealableB
     public static final int MAX_AGE = 3;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
+    @Override
+    public ItemStack getCloneItemStack(final LevelReader level, final BlockPos pos, final BlockState state, final boolean includeData){
+        return new ItemStack(ModItems.CANNABIS_SEEDS);
+    }
 
     @Override
     public MapCodec<CannabisPlantBlock> codec(){
@@ -176,11 +182,6 @@ public class CannabisPlantBlock extends VegetationBlock implements BonemealableB
 
     protected ItemLike getBaseSeedId() {
 		return ModItems.CANNABIS_SEEDS;
-	}
-
-    @Override
-	protected ItemStack getCloneItemStack(final LevelReader level, final BlockPos pos, final BlockState state, final boolean includeData) {
-		return new ItemStack(this.getBaseSeedId());
 	}
 
     @Override
