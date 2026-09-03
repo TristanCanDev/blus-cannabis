@@ -57,7 +57,7 @@ public class ModItems{
 
     public static void initialize(){
 
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS)
         .register(entries -> {
             entries.accept(CANNABIS_BUD);
             entries.accept(CANNABIS_SEEDS);
