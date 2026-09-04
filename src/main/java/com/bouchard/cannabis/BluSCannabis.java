@@ -50,8 +50,8 @@ public class BluSCannabis implements ModInitializer {
 		});
 		LOGGER.info("[cannabis] Updated short and tall grass loot pools for cannabis seed drops");
 
-		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.STONY_PEAKS, Biomes.MEADOW, Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS), GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "cannabis_patch")));
-		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.JUNGLE, Biomes.BAMBOO_JUNGLE, Biomes.FOREST, Biomes.SPARSE_JUNGLE, Biomes.RIVER), GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "cannabis_patch_forest_jungle")));
+		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.MEADOW, Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS, Biomes.FOREST), GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "cannabis_patch")));
+		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.STONY_PEAKS, Biomes.JUNGLE, Biomes.BAMBOO_JUNGLE, Biomes.SPARSE_JUNGLE, Biomes.RIVER), GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "cannabis_patch_forest_jungle")));
 
 		LOGGER.info("[cannabis] I was gonna log something useful, but then I got high");
 	}
