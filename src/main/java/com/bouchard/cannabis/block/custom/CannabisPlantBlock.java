@@ -21,6 +21,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -31,18 +32,12 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.redstone.Orientation;
 
 public class CannabisPlantBlock extends VegetationBlock implements BonemealableBlock{
-    public static final MapCodec<CannabisPlantBlock> CODEC = simpleCodec(CannabisPlantBlock::new);
     public static final int MAX_AGE = 3;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
     @Override
     public ItemStack getCloneItemStack(final LevelReader level, final BlockPos pos, final BlockState state, final boolean includeData){
         return new ItemStack(ModItems.CANNABIS_SEEDS);
-    }
-
-    @Override
-    public MapCodec<CannabisPlantBlock> codec(){
-        return CODEC;
     }
 
     public CannabisPlantBlock(final BlockBehaviour.Properties properties){
@@ -179,17 +174,17 @@ public class CannabisPlantBlock extends VegetationBlock implements BonemealableB
 	}
 
     @Override
-    public boolean isValidBonemealTarget(final LevelReader level, final BlockPos pos, final BlockState state){
+    public boolean isValidBonemealTarget(final LevelReader level, final BlockPos pos, final BlockState state, BonemealSource source){
         return BonemealableBlock.hasSpreadableNeighbourPos(level, pos, state);
     }
 
     @Override
-	public boolean isBonemealSuccess(final Level level, final RandomSource random, final BlockPos pos, final BlockState state) {
+	public boolean isBonemealSuccess(final Level level, final RandomSource random, final BlockPos pos, final BlockState state, BonemealSource source) {
 		return true;
 	}
 
     @Override
-    public void performBonemeal(final ServerLevel level, final RandomSource random, final BlockPos pos, final BlockState state) {
+    public void performBonemeal(final ServerLevel level, final RandomSource random, final BlockPos pos, final BlockState state, BonemealSource source) {
         this.growCrops(level, pos, state);
     }
 
