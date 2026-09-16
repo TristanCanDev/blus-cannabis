@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 
@@ -22,7 +23,7 @@ public class CannabisSeeds extends Item {
         if(context.getLevel().getBlockState(context.getClickedPos()).is(BlockTags.SUPPORTS_VEGETATION) && context.getLevel().getBlockState(context.getClickedPos().above()).is(Blocks.AIR)){
             context.getLevel().setBlock(context.getClickedPos().above(), ModBlocks.CANNABIS_PLANT.defaultBlockState(), 3);
             context.getLevel().playLocalSound(context.getClickedPos().above(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1f, 1f, false);
-            context.getPlayer().swing(context.getHand());
+            context.getPlayer().swing(context.getHand(), SwingAnimation.DEFAULT, true);
             context.getItemInHand().shrink(1);
         }
 
