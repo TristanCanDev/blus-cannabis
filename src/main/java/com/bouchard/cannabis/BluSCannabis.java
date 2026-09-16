@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 public class BluSCannabis implements ModInitializer {
 	public static final String MOD_ID = "cannabis";
@@ -44,7 +44,7 @@ public class BluSCannabis implements ModInitializer {
 		// Modify the short grass and tall grass loot tables to include cannabis seed drops (They drop at a probability of 0.001)
 		LootTableEvents.MODIFY.register((lootTable, builder, source, provider) -> {
 			if((lootTable.identifier().equals(Blocks.SHORT_GRASS.getLootTable().get().identifier()) || lootTable.identifier().equals(Blocks.TALL_GRASS.getLootTable().get().identifier()) || lootTable.identifier().equals(Blocks.TALL_DRY_GRASS.getLootTable().get().identifier())) && source.isBuiltin()){
-				LootPool poolBuilder = LootPool.lootPool().setRolls(new ConstantValue(1f)).add(LootItem.lootTableItem(ModItems.CANNABIS_SEEDS)).when(LootItemRandomChanceCondition.randomChance(0.001f)).build();
+				LootPool poolBuilder = LootPool.lootPool().setRolls(ContextIntProviders.exactly(1)).add(LootItem.lootTableItem(ModItems.CANNABIS_SEEDS)).when(LootItemRandomChanceCondition.randomChance(0.001f)).build();
 				builder.pool(poolBuilder);
 			}
 		});
