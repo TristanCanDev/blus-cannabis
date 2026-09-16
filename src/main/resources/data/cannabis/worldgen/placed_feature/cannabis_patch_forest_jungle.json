@@ -10,15 +10,22 @@
             "count": 20
         },
         {
-            "type": "minecraft:random_offset",
-            "xz_spread": {
+            "type": "minecraft:offset",
+            "x":{
                 "type": "minecraft:clamped_normal",
                 "mean": 0.0,
                 "deviation": 3.0,
                 "min_inclusive": -6,
                 "max_inclusive": 6
             },
-            "y_spread": {
+            "z":{
+                "type": "minecraft:clamped_normal",
+                "mean": 0.0,
+                "deviation": 3.0,
+                "min_inclusive": -6,
+                "max_inclusive": 6
+            },
+            "y":{
                 "type": "minecraft:constant",
                 "value": 0
             }
@@ -31,9 +38,9 @@
             "type": "minecraft:block_predicate_filter",
             "predicate": {
                 "type": "minecraft:would_survive",
-                "state": {
-                    "Name": "cannabis:cannabis_plant",
-                    "Properties": {
+                "state":{
+                    "id": "cannabis:cannabis_plant",
+                    "properties": {
                         "age": "0"
                     }
                 }

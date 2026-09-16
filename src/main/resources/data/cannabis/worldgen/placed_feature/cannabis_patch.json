@@ -20,9 +20,9 @@
             "type": "minecraft:block_predicate_filter",
             "predicate": {
                 "type": "minecraft:would_survive",
-                "state": {
-                    "Name": "cannabis:cannabis_plant",
-                    "Properties": {
+                "state":{
+                    "id": "cannabis:cannabis_plant",
+                    "properties": {
                         "age": "0"
                     }
                 }
