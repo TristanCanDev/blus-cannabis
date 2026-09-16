@@ -6,9 +6,10 @@ import com.bouchard.cannabis.item.custom.CannabisJoint;
 import com.bouchard.cannabis.item.custom.CannabisSeeds;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
-import net.fabricmc.fabric.api.registry.CompostableRegistry;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
@@ -19,8 +20,10 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.component.Compostable;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ResolvableInt;
 
 public class ModItems{
 
@@ -67,8 +70,22 @@ public class ModItems{
         });
 
         // Register compostables
-        CompostableRegistry.INSTANCE.add(ModItems.CANNABIS_BUD, 0.3f);
-        CompostableRegistry.INSTANCE.add(ModItems.CANNABIS_SEEDS, 0.3f);
+        
+        // Legacy Compastable Registration
+        // CompostableRegistry.INSTANCE.add(ModItems.CANNABIS_BUD, 0.3f);
+        // CompostableRegistry.INSTANCE.add(ModItems.CANNABIS_SEEDS, 0.3f);
+
+        // 26.3 Compostable
+        DefaultItemComponentEvents.MODIFY.register(modifyContext -> {
+            modifyContext.modify(ModItems.CANNABIS_BUD, builder -> {
+                builder.set(DataComponents.COMPOSTABLE, new Compostable(new ResolvableInt.Constant(1*100)));
+            });
+        });
+        DefaultItemComponentEvents.MODIFY.register(modifyContext -> {
+            modifyContext.modify(ModItems.CANNABIS_SEEDS, builder -> {
+                builder.set(DataComponents.COMPOSTABLE, new Compostable(new ResolvableInt.Constant(1*100)));
+            });
+        });
 
     }
 
