@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "cannabis:cannabis_joint"
+        "recipes": "cannabis:cannabis_joint"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
