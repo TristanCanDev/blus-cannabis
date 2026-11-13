@@ -42,13 +42,13 @@ public class BluSCannabis implements ModInitializer {
 		LOGGER.info("[cannabis] Initialized Cannabis Blocks");
 
 		// Modify the short grass and tall grass loot tables to include cannabis seed drops (They drop at a probability of 0.001)
-		LootTableEvents.MODIFY.register((lootTable, builder, source, provider) -> {
-			if((lootTable.identifier().equals(Blocks.SHORT_GRASS.getLootTable().get().identifier()) || lootTable.identifier().equals(Blocks.TALL_GRASS.getLootTable().get().identifier()) || lootTable.identifier().equals(Blocks.TALL_DRY_GRASS.getLootTable().get().identifier())) && source.isBuiltin()){
-				LootPool poolBuilder = LootPool.lootPool().setRolls(ContextIntProviders.exactly(1)).add(LootItem.lootTableItem(ModItems.CANNABIS_SEEDS)).when(LootItemRandomChanceCondition.randomChance(0.001f)).build();
-				builder.pool(poolBuilder);
-			}
-		});
-		LOGGER.info("[cannabis] Updated short and tall grass loot pools for cannabis seed drops");
+		// LootTableEvents.MODIFY.register((lootTable, builder, source, provider) -> {
+		// 	if((lootTable.identifier().equals(Blocks.SHORT_GRASS.getLootTable().get().identifier()) || lootTable.identifier().equals(Blocks.TALL_GRASS.getLootTable().get().identifier()) || lootTable.identifier().equals(Blocks.TALL_DRY_GRASS.getLootTable().get().identifier())) && source.isBuiltin()){
+		// 		LootPool poolBuilder = LootPool.lootPool().setRolls(ContextIntProviders.exactly(1)).add(LootItem.lootTableItem(ModItems.CANNABIS_SEEDS)).when(LootItemRandomChanceCondition.randomChance(0.001f)).build();
+		// 		builder.pool(poolBuilder);
+		// 	}
+		// });
+		// LOGGER.info("[cannabis] Updated short and tall grass loot pools for cannabis seed drops");
 
 		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.MEADOW, Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS, Biomes.FOREST), GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "cannabis_patch")));
 		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.STONY_PEAKS, Biomes.JUNGLE, Biomes.BAMBOO_JUNGLE, Biomes.SPARSE_JUNGLE, Biomes.RIVER), GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "cannabis_patch_forest_jungle")));
